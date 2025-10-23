@@ -1,1 +1,353 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CactusBoard – Reklamuj Swój Serwer Discord!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        :root {
+            --primary: #00d26a;
+            --primary-dark: #00a854;
+            --secondary: #ff6b6b;
+            --bg: #0a0e17;
+            --card: #131a26;
+            --text: #e0f7fa;
+            --accent: #4ecdc4;
+            --glow: 0 0 20px rgba(0, 210, 106, 0.6);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animowane tło z kaktusami */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .cactus {
+            position: absolute;
+            font-size: 3rem;
+            color: rgba(0, 210, 106, 0.15);
+            animation: float 8s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 106, 0.3));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        /* Nagłówek */
+        header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--glow);
+            animation: pulse 2s infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.5s;
+            color: #a0f7d0;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Główna sekcja */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(19, 26, 38, 0.9), rgba(10, 14, 23, 0.95));
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: var(--glow), inset 0 0 30px rgba(0, 210, 106, 0.1);
+            border: 1px solid rgba(0, 210, 106, 0.3);
+            margin-bottom: 3rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), #45f3b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 1s;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 1.3s;
+        }
+
+        .tag {
+            background: rgba(0, 210, 106, 0.15);
+            color: var(--primary);
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid var(--primary);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: var(--bg);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 210, 106, 0.4);
+        }
+
+        /* Przycisk CTA */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            box-shadow: var(--glow);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: bounce 2s infinite 2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 210, 106, 0.5);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.7s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Sekcja funkcji */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(0, 210, 106, 0.2);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card:nth-child(1) { animation: fadeInUp 0.8s forwards 1.8s; }
+        .feature-card:nth-child(2) { animation: fadeInUp 0.8s forwards 2s; }
+        .feature-card:nth-child(3) { animation: fadeInUp 0.8s forwards 2.2s; }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+            border-color: var(--primary);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Stopka */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            font-size: 0.9rem;
+            color: #777;
+            border-top: 1px solid rgba(0, 210, 106, 0.2);
+            margin-top: 4rem;
+        }
+
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .logo { font-size: 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .description { font-size: 1rem; }
+            .cta-button { padding: 0.9rem 2rem; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animowane tło z kaktusami -->
+    <div class="bg-animation" id="cacti"></div>
+
+    <header>
+        <h1 class="logo">CactusBoard</h1>
+        <p class="subtitle">Twoja tablica ogłoszeń serwerów Discord</p>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Reklamuj Swój Serwer – Za Darmo!</h1>
+            <p class="description">
+                Witaj na <strong>CactusBoard</strong> – pierwszej w Polsce, w pełni darmowej platformie do reklamowania serwerów Discord! 
+                Niezależnie od tego, czy prowadzisz serwer gamingowy, społeczny, edukacyjny, czy muzyczny – każdy może dodać swoją reklamę. 
+                Prosty system, zero opłat, maksymalna widoczność. Dodaj opis do 1000 znaków, wybierz tagi, dodaj banner i link – gotowe! 
+                Twoja reklama pojawi się wśród setek innych serwerów i dotrze do tysięcy użytkowników. 
+                Dołącz do społeczności, która rośnie z każdym dniem. Reklamuj się mądrze – reklamuj się na CactusBoard!
+            </p>
+
+            <div class="tags">
+                <span class="tag">#Gaming</span>
+                <span class="tag">#Społeczność</span>
+                <span class="tag">#Muzyka</span>
+                <span class="tag">#Edukacja</span>
+                <span class="tag">#Roleplay</span>
+                <span class="tag">#Anime</span>
+                <span class="tag">#Tech</span>
+                <span class="tag">#Sztuka</span>
+            </div>
+
+            <a href="#" class="cta-button">
+                <i class="fas fa-plus-circle"></i> Dodaj Swój Serwer Teraz!
+            </a>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-bullhorn"></i>
+                <h3>100% Darmowe</h3>
+                <p>Zero opłat, zero ukrytych kosztów. Reklama dla każdego!</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Bezpieczne i Moderowane</h3>
+                <p>Każda reklama jest sprawdzana. Żadnych scamów!</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Błyskawiczna Publikacja</h3>
+                <p>Dodaj serwer w 60 sekund i zacznij przyciągać członków!</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CactusBoard – Wszelkie prawa zastrzeżone. | Stworzone z <i class="fas fa-heart" style="color:#ff6b6b"></i> dla społeczności Discord</p>
+    </footer>
+
+    <script>
+        // Generowanie animowanych kaktusów w tle
+        const cactiContainer = document.getElementById('cacti');
+        const cactusCount = 15;
+
+        for (let i = 0; i < cactusCount; i++) {
+            const cactus = document.createElement('div');
+            cactus.className = 'cactus';
+            cactus.innerHTML = '🌵';
+            cactus.style.left = `${Math.random() * 100}%`;
+            cactus.style.top = `${Math.random() * 100}%`;
+            cactus.style.animationDelay = `${Math.random() * 5}s`;
+            cactus.style.fontSize = `${2 + Math.random() * 3}rem`;
+            cactiContainer.appendChild(cactus);
+        }
+
+        // Efekt paralaksy przy scrollu (delikatny)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.cactus');
+            parallax.forEach(cactus => {
+                const speed = 0.5;
+                cactus.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.01}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>
