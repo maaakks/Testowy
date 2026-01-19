@@ -1,353 +1,390 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>CactusBoard – Reklamuj Swój Serwer Discord!</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-BOOST ULTRA | v3.0 MAXIMUM ENTERPRISE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@200;400;600;800&family=JetBrains+Mono:wght@100;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00d26a;
-            --primary-dark: #00a854;
-            --secondary: #ff6b6b;
-            --bg: #0a0e17;
-            --card: #131a26;
-            --text: #e0f7fa;
-            --accent: #4ecdc4;
-            --glow: 0 0 20px rgba(0, 210, 106, 0.6);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --primary: #00ffcc;
+            --danger: #ff0055;
+            --bg-deep: #020205;
+            --glass: rgba(15, 15, 25, 0.85);
         }
 
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Poppins', sans-serif;
+            background: var(--bg-deep);
+            color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
-        /* Animowane tło z kaktusami */
-        .bg-animation {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
+        /* TŁO CZĄSTECZKOWE I SIATKA */
+        .master-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
         }
 
-        .cactus {
-            position: absolute;
-            font-size: 3rem;
-            color: rgba(0, 210, 106, 0.15);
-            animation: float 8s infinite ease-in-out;
-            filter: drop-shadow(0 0 10px rgba(0, 210, 106, 0.3));
+        .aurora-blur {
+            position: fixed; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, transparent 70%);
+            border-radius: 50%; blur: 120px; z-index: -1; animation: drift 20s infinite alternate;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(5deg); }
+        @keyframes drift { from { transform: translate(-10%, -10%); } to { transform: translate(30%, 30%); } }
+
+        /* UI ELEMENTS */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* Nagłówek */
-        header {
-            text-align: center;
-            padding: 4rem 2rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: var(--glow);
-            animation: pulse 2s infinite;
-            margin-bottom: 1rem;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.5s;
-            color: #a0f7d0;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Główna sekcja */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, rgba(19, 26, 38, 0.9), rgba(10, 14, 23, 0.95));
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            box-shadow: var(--glow), inset 0 0 30px rgba(0, 210, 106, 0.1);
-            border: 1px solid rgba(0, 210, 106, 0.3);
-            margin-bottom: 3rem;
-            animation: slideIn 1s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, var(--primary), #45f3b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .description {
-            font-size: 1.2rem;
-            max-width: 900px;
-            margin: 0 auto 2rem;
-            line-height: 1.8;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 1s;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 1.3s;
-        }
-
-        .tag {
-            background: rgba(0, 210, 106, 0.15);
-            color: var(--primary);
-            padding: 0.6rem 1.4rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: 1px solid var(--primary);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .tag:hover {
-            background: var(--primary);
-            color: var(--bg);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 210, 106, 0.4);
-        }
-
-        /* Przycisk CTA */
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            color: white;
-            padding: 1rem 2.5rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-            border-radius: 50px;
-            text-decoration: none;
-            margin-top: 1.5rem;
-            box-shadow: var(--glow);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            animation: bounce 2s infinite 2s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 210, 106, 0.5);
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.7s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* Sekcja funkcji */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .feature-card {
-            background: var(--card);
-            padding: 2rem;
-            border-radius: 16px;
-            text-align: center;
-            border: 1px solid rgba(0, 210, 106, 0.2);
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .feature-card:nth-child(1) { animation: fadeInUp 0.8s forwards 1.8s; }
-        .feature-card:nth-child(2) { animation: fadeInUp 0.8s forwards 2s; }
-        .feature-card:nth-child(3) { animation: fadeInUp 0.8s forwards 2.2s; }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--glow);
+        .neon-glow:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
             border-color: var(--primary);
         }
 
-        .feature-card i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: block;
+        .admin-gradient { background: linear-gradient(135deg, #1e1e2f 0%, #0a0a0f 100%); }
+        
+        .tab-btn { position: relative; padding: 10px 20px; transition: color 0.3s; }
+        .tab-btn.active { color: var(--primary); font-weight: 800; }
+        .tab-btn.active::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 30px; height: 3px; background: var(--primary); box-shadow: 0 0 10px var(--primary);
         }
 
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
+        input { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; outline: none !important; }
+        input:focus { border-color: var(--primary) !important; box-shadow: 0 0 15px rgba(0,255,204,0.2) !important; }
 
-        /* Stopka */
-        footer {
-            text-align: center;
-            padding: 3rem 1rem;
-            font-size: 0.9rem;
-            color: #777;
-            border-top: 1px solid rgba(0, 210, 106, 0.2);
-            margin-top: 4rem;
-        }
-
-        /* Responsywność */
-        @media (max-width: 768px) {
-            .logo { font-size: 3rem; }
-            .hero h1 { font-size: 2.2rem; }
-            .description { font-size: 1rem; }
-            .cta-button { padding: 0.9rem 2rem; font-size: 1.1rem; }
-        }
+        .sidebar-item:hover { background: rgba(0, 255, 204, 0.05); color: var(--primary); }
     </style>
 </head>
-<body>
+<body class="selection:bg-teal-500 selection:text-black">
+    <div class="master-grid"></div>
+    <div class="aurora-blur"></div>
 
-    <!-- Animowane tło z kaktusami -->
-    <div class="bg-animation" id="cacti"></div>
+    <div id="app-root">
+        
+        <nav class="sticky top-0 z-[1000] border-b border-white/5 bg-black/50 backdrop-blur-3xl px-8 py-6">
+            <div class="max-w-[1800px] mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-6">
+                    <div class="h-14 w-14 bg-gradient-to-tr from-teal-400 to-indigo-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-teal-500/20 group cursor-pointer">
+                        <span class="font-black text-2xl tracking-tighter group-hover:scale-110 transition">V3</span>
+                    </div>
+                    <div>
+                        <h1 class="font-extrabold text-2xl tracking-tighter" style="font-family: 'Syncopate';">V-BOOST <span class="text-teal-400">ULTRA</span></h1>
+                        <p class="text-[9px] font-bold tracking-[0.5em] text-slate-500 uppercase">System Intelligence Operational</p>
+                    </div>
+                </div>
 
-    <header>
-        <h1 class="logo">CactusBoard</h1>
-        <p class="subtitle">Twoja tablica ogłoszeń serwerów Discord</p>
-    </header>
-
-    <div class="container">
-        <section class="hero">
-            <h1>Reklamuj Swój Serwer – Za Darmo!</h1>
-            <p class="description">
-                Witaj na <strong>CactusBoard</strong> – pierwszej w Polsce, w pełni darmowej platformie do reklamowania serwerów Discord! 
-                Niezależnie od tego, czy prowadzisz serwer gamingowy, społeczny, edukacyjny, czy muzyczny – każdy może dodać swoją reklamę. 
-                Prosty system, zero opłat, maksymalna widoczność. Dodaj opis do 1000 znaków, wybierz tagi, dodaj banner i link – gotowe! 
-                Twoja reklama pojawi się wśród setek innych serwerów i dotrze do tysięcy użytkowników. 
-                Dołącz do społeczności, która rośnie z każdym dniem. Reklamuj się mądrze – reklamuj się na CactusBoard!
-            </p>
-
-            <div class="tags">
-                <span class="tag">#Gaming</span>
-                <span class="tag">#Społeczność</span>
-                <span class="tag">#Muzyka</span>
-                <span class="tag">#Edukacja</span>
-                <span class="tag">#Roleplay</span>
-                <span class="tag">#Anime</span>
-                <span class="tag">#Tech</span>
-                <span class="tag">#Sztuka</span>
+                <div class="hidden lg:flex items-center gap-8 text-[11px] font-bold tracking-widest text-slate-400">
+                    <button onclick="switchTab('main')" id="btn-main" class="tab-btn active">GENERATOR</button>
+                    <button onclick="switchTab('market')" id="btn-market" class="tab-btn">ANALIZA RYNKU</button>
+                    <button onclick="switchTab('contact')" id="btn-contact" class="tab-btn">KONTAKT</button>
+                    <button onclick="toggleAdminModal()" class="px-4 py-2 border border-red-500/30 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition">ADMIN ACCESS</button>
+                </div>
             </div>
+        </nav>
 
-            <a href="#" class="cta-button">
-                <i class="fas fa-plus-circle"></i> Dodaj Swój Serwer Teraz!
-            </a>
-        </section>
+        <div class="max-w-[1800px] mx-auto px-8 py-12 grid grid-cols-12 gap-10">
+            
+            <section id="section-main" class="col-span-12 lg:col-span-8 space-y-10 tab-content">
+                <div class="glass-card p-12 neon-glow relative overflow-hidden">
+                    <div class="absolute -right-20 -top-20 w-80 h-80 bg-teal-500/5 rounded-full blur-[100px]"></div>
+                    <h2 class="text-4xl font-black mb-10 tracking-tight leading-none">KONFIGURATOR <br><span class="text-teal-400">ARCHITEKTURY OFERTY</span></h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Nazwa Obiektu</label>
+                            <input id="inName" type="text" placeholder="NP: NIKE DUNK LOW RETRO" class="w-full p-6 rounded-3xl text-xl font-bold">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Marka / Brand</label>
+                            <input id="inBrand" type="text" placeholder="NP: NIKE" class="w-full p-6 rounded-3xl text-xl font-bold">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Cena Docelowa (PLN)</label>
+                            <input id="inPrice" type="number" placeholder="0.00" class="w-full p-6 rounded-3xl text-xl font-bold">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Kondycja Systemowa</label>
+                            <select id="inCond" class="w-full p-6 rounded-3xl bg-[#0a0a0f] border border-white/10 font-bold appearance-none">
+                                <option>Nowy (DS)</option>
+                                <option>VNDS (Jak nowy)</option>
+                                <option>Używany (Dobry)</option>
+                            </select>
+                        </div>
+                    </div>
 
-        <section class="features">
-            <div class="feature-card">
-                <i class="fas fa-bullhorn"></i>
-                <h3>100% Darmowe</h3>
-                <p>Zero opłat, zero ukrytych kosztów. Reklama dla każdego!</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Bezpieczne i Moderowane</h3>
-                <p>Każda reklama jest sprawdzana. Żadnych scamów!</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-rocket"></i>
-                <h3>Błyskawiczna Publikacja</h3>
-                <p>Dodaj serwer w 60 sekund i zacznij przyciągać członków!</p>
-            </div>
-        </section>
+                    <button onclick="runMasterGenerator()" class="w-full py-8 bg-gradient-to-r from-teal-500 to-blue-600 rounded-3xl font-black text-xl tracking-widest uppercase hover:scale-[1.01] transition shadow-2xl shadow-teal-500/30">
+                        Zainicjuj Generowanie Neuronowe
+                    </button>
+
+                    <div id="genResult" class="hidden mt-12 p-8 bg-black/50 border border-teal-500/30 rounded-[40px] animate-in fade-in zoom-in">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-[10px] font-black text-teal-400 tracking-[0.4em]">OUTPUT_LOG</span>
+                            <button onclick="copyToClipboard()" class="text-[10px] font-bold bg-white text-black px-4 py-2 rounded-full hover:bg-teal-400 transition">KOPIUJ</button>
+                        </div>
+                        <div id="outText" class="font-mono text-sm text-slate-300 leading-relaxed whitespace-pre-wrap italic"></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-8 text-center space-y-4 hover:border-teal-500/50 transition">
+                        <div class="w-12 h-12 bg-teal-500/10 text-teal-400 rounded-xl flex items-center justify-center mx-auto">📸</div>
+                        <h4 class="font-bold text-sm uppercase tracking-widest">Usuwanie Tła</h4>
+                        <p class="text-xs text-slate-500">AI Background Remover Pro v3.0</p>
+                    </div>
+                    <div class="glass-card p-8 text-center space-y-4 hover:border-teal-500/50 transition">
+                        <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mx-auto">🏷️</div>
+                        <h4 class="font-bold text-sm uppercase tracking-widest">Smart Tags</h4>
+                        <p class="text-xs text-slate-500">Generator 30 hashtagów SEO</p>
+                    </div>
+                    <div class="glass-card p-8 text-center space-y-4 hover:border-teal-500/50 transition">
+                        <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center mx-auto">⚖️</div>
+                        <h4 class="font-bold text-sm uppercase tracking-widest">Legit Check</h4>
+                        <p class="text-xs text-slate-500">Wstępna weryfikacja autentyczności</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-contact" class="col-span-12 lg:col-span-8 hidden tab-content animate-in slide-in-from-left-10 duration-500">
+                <div class="glass-card p-12">
+                    <h2 class="text-4xl font-black mb-6">KONTAKT <span class="text-teal-400">Z OPERATOREM</span></h2>
+                    <p class="text-slate-400 mb-10">Masz błąd w systemie? Chcesz wykupić wersję Enterprise? Napisz bezpośrednio.</p>
+                    
+                    <form onsubmit="event.preventDefault(); alert('Wiadomość wysłana do bazy danych właściciela!')" class="space-y-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <input type="text" placeholder="Twoje Imię" class="w-full p-5 rounded-2xl">
+                            <input type="email" placeholder="E-mail zwrotny" class="w-full p-5 rounded-2xl">
+                        </div>
+                        <textarea placeholder="W czym możemy pomóc?" class="w-full p-5 rounded-2xl h-48 bg-white/5 border border-white/10 text-white outline-none focus:border-teal-400"></textarea>
+                        <button class="px-10 py-5 bg-white text-black font-black rounded-2xl hover:bg-teal-400 transition">WYŚLIJ RAPORT</button>
+                    </form>
+                </div>
+            </section>
+
+            <aside class="col-span-12 lg:col-span-4 space-y-8">
+                <div class="glass-card p-8 space-y-8 border-teal-500/20">
+                    <h3 class="font-black text-xl tracking-tighter uppercase underline decoration-teal-500 underline-offset-8">Finanse & Staty</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Przewidywany Zysk Netto</span>
+                            <div class="text-5xl font-black text-teal-400 mt-2" id="netOut">0.00 <span class="text-lg">PLN</span></div>
+                        </div>
+                        
+                        <div class="p-6 bg-white/5 rounded-3xl space-y-4">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-400">Prowizja Vinted (7% + 2.90)</span>
+                                <span class="text-red-400" id="feeOut">0.00 PLN</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-400">Opłata Serwisowa V3</span>
+                                <span class="text-green-400 text-xs font-bold font-mono">FREE_PROMO</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/10">
+                        <h4 class="text-xs font-bold uppercase tracking-widest mb-4">Trend Category Pulse</h4>
+                        <div class="flex gap-2 h-20 items-end">
+                            <div class="flex-1 bg-teal-500/20 rounded-t-lg h-[40%]" id="bar-1"></div>
+                            <div class="flex-1 bg-teal-500/20 rounded-t-lg h-[70%]" id="bar-2"></div>
+                            <div class="flex-1 bg-teal-500/20 rounded-t-lg h-[90%]" id="bar-3"></div>
+                            <div class="flex-1 bg-teal-500/20 rounded-t-lg h-[50%]" id="bar-4"></div>
+                            <div class="flex-1 bg-teal-500/20 rounded-t-lg h-[65%]" id="bar-5"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 bg-gradient-to-br from-indigo-950/50 to-black overflow-hidden relative group cursor-crosshair">
+                    <div class="absolute -right-5 -top-5 w-20 h-20 bg-teal-500/20 rounded-full blur-2xl group-hover:scale-150 transition"></div>
+                    <h3 class="font-bold text-sm tracking-[0.2em] uppercase mb-4 text-teal-400 italic">Core Status: Stable</h3>
+                    <p class="text-[10px] leading-loose text-slate-400 font-mono">
+                        > SERVER: PL_CENTRAL_01<br>
+                        > LATENCY: 12ms<br>
+                        > ENCRYPTION: AES-256<br>
+                        > USER: UNKNOWN_OPERATOR
+                    </p>
+                </div>
+            </aside>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 CactusBoard – Wszelkie prawa zastrzeżone. | Stworzone z <i class="fas fa-heart" style="color:#ff6b6b"></i> dla społeczności Discord</p>
-    </footer>
+    <div id="admin-modal" class="fixed inset-0 z-[2000] bg-black/95 flex items-center justify-center p-6 hidden backdrop-blur-3xl animate-in fade-in">
+        <div class="glass-card max-w-xl w-full p-12 admin-gradient border-teal-500 shadow-[0_0_100px_rgba(0,255,204,0.1)]">
+            <h2 class="text-3xl font-black mb-8 tracking-tighter" style="font-family: 'Syncopate';">ADMIN <span class="text-teal-400">LOGIN</span></h2>
+            <div class="space-y-6">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">E-mail</label>
+                    <input id="admin-user" type="email" placeholder="twoj@email.com" class="w-full p-5 rounded-2xl mt-2">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Klucz Dostępu</label>
+                    <input id="admin-pass" type="password" placeholder="********" class="w-full p-5 rounded-2xl mt-2">
+                </div>
+                <button onclick="checkAdminAccess()" class="w-full py-5 bg-teal-500 text-black font-black rounded-2xl uppercase tracking-widest hover:bg-white transition">Autoryzuj</button>
+                <button onclick="toggleAdminModal()" class="w-full py-2 text-slate-500 text-xs font-bold hover:text-white transition">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-panel" class="fixed inset-0 z-[3000] bg-[#020205] hidden flex flex-col">
+        <header class="p-8 border-b border-white/5 flex justify-between items-center bg-black">
+            <h2 class="font-black tracking-[0.4em] text-teal-400 uppercase">SYSTEM_OPERATOR_DASHBOARD_v3</h2>
+            <button onclick="logoutAdmin()" class="px-6 py-2 bg-red-600 text-white font-bold rounded-lg text-xs uppercase tracking-widest">Wyloguj</button>
+        </header>
+        <div class="flex-1 grid grid-cols-12">
+            <aside class="col-span-2 border-r border-white/5 p-8 space-y-2">
+                <div class="sidebar-item p-4 rounded-xl cursor-pointer font-bold text-xs uppercase tracking-widest text-teal-400 bg-teal-400/5">Database</div>
+                <div class="sidebar-item p-4 rounded-xl cursor-pointer font-bold text-xs uppercase tracking-widest opacity-40">User Logs</div>
+                <div class="sidebar-item p-4 rounded-xl cursor-pointer font-bold text-xs uppercase tracking-widest opacity-40">Revenue Map</div>
+                <div class="sidebar-item p-4 rounded-xl cursor-pointer font-bold text-xs uppercase tracking-widest opacity-40">System API</div>
+            </aside>
+            <main class="col-span-10 p-12 overflow-y-auto space-y-8">
+                <div class="grid grid-cols-3 gap-8">
+                    <div class="p-8 border border-white/5 rounded-[40px] bg-white/5">
+                        <p class="text-slate-500 text-xs uppercase tracking-widest mb-2 font-bold">Total Requests</p>
+                        <h4 class="text-4xl font-black">124,502</h4>
+                    </div>
+                    <div class="p-8 border border-white/5 rounded-[40px] bg-white/5">
+                        <p class="text-slate-500 text-xs uppercase tracking-widest mb-2 font-bold">Active Conversions</p>
+                        <h4 class="text-4xl font-black">98.2%</h4>
+                    </div>
+                    <div class="p-8 border border-white/5 rounded-[40px] bg-white/5">
+                        <p class="text-slate-500 text-xs uppercase tracking-widest mb-2 font-bold">Encrypted Nodes</p>
+                        <h4 class="text-4xl font-black">1,024</h4>
+                    </div>
+                </div>
+                
+                <div class="p-10 border border-teal-500/20 rounded-[40px] bg-teal-500/5">
+                    <h3 class="font-bold text-xl mb-6">User Activity Logs</h3>
+                    <table class="w-full text-left text-xs text-slate-400">
+                        <tr class="border-b border-white/5">
+                            <th class="pb-4">Timestamp</th>
+                            <th class="pb-4">User_ID</th>
+                            <th class="pb-4">Action</th>
+                            <th class="pb-4">Status</th>
+                        </tr>
+                        <tr class="border-b border-white/5">
+                            <td class="py-4 font-mono">2026-01-19 14:20:11</td>
+                            <td>USER_9281</td>
+                            <td>GENERATE_PREMIUM_DESC</td>
+                            <td class="text-green-500">SUCCESS</td>
+                        </tr>
+                        <tr class="border-b border-white/5">
+                            <td class="py-4 font-mono">2026-01-19 14:19:02</td>
+                            <td>USER_1122</td>
+                            <td>ADMIN_MODAL_ACCESS_ATTEMPT</td>
+                            <td class="text-red-500">DENIED</td>
+                        </tr>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
 
     <script>
-        // Generowanie animowanych kaktusów w tle
-        const cactiContainer = document.getElementById('cacti');
-        const cactusCount = 15;
+        // SYSTEM CORE v3
+        const ADMIN_CREDENTIALS = {
+            user: "mmaakksskkmm0000@gmail.com",
+            pass: "Maks981com!"
+        };
 
-        for (let i = 0; i < cactusCount; i++) {
-            const cactus = document.createElement('div');
-            cactus.className = 'cactus';
-            cactus.innerHTML = '🌵';
-            cactus.style.left = `${Math.random() * 100}%`;
-            cactus.style.top = `${Math.random() * 100}%`;
-            cactus.style.animationDelay = `${Math.random() * 5}s`;
-            cactus.style.fontSize = `${2 + Math.random() * 3}rem`;
-            cactiContainer.appendChild(cactus);
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(`section-${tabId}`).classList.remove('hidden');
+            document.getElementById(`btn-${tabId}`).classList.add('active');
         }
 
-        // Efekt paralaksy przy scrollu (delikatny)
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.cactus');
-            parallax.forEach(cactus => {
-                const speed = 0.5;
-                cactus.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.01}deg)`;
-            });
-        });
+        // Admin Auth System
+        function toggleAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function checkAdminAccess() {
+            const user = document.getElementById('admin-user').value;
+            const pass = document.getElementById('admin-pass').value;
+
+            if(user === ADMIN_CREDENTIALS.user && pass === ADMIN_CREDENTIALS.pass) {
+                document.getElementById('admin-modal').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                console.log("ACCESS_GRANTED: Welcome Operator Maks.");
+            } else {
+                alert("ACCESS DENIED: Podano błędne poświadczenia.");
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('admin-panel').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Master Generator Logic
+        function runMasterGenerator() {
+            const name = document.getElementById('inName').value;
+            const brand = document.getElementById('inBrand').value;
+            const cond = document.getElementById('inCond').value;
+            const resBox = document.getElementById('genResult');
+            const resText = document.getElementById('outText');
+
+            if(!name) return alert("System Error: Wpisz nazwę produktu.");
+
+            resBox.classList.remove('hidden');
+            resText.innerText = "INITIALIZING_NEURAL_PROCESSING_v3.0...\nLOADING_BRAND_PARAMETERS [" + brand.toUpperCase() + "]\nCALCULATING_SEO_WEIGHTS...";
+
+            setTimeout(() => {
+                const finalDesc = `💎 V-BOOST ULTRA | ARCHIVE SELECTION 💎\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nITEM: ${name.toUpperCase()}\nBRAND: ${brand.toUpperCase()}\nCONDITION: ${cond}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nOPIS OPERACYJNY:\nPrezentujemy wybitny egzemplarz marki ${brand}. Model ${name} to kwintesencja designu i trwałości. Każdy szew, każdy detal został zweryfikowany pod kątem jakości premium. Stan techniczny obiektu: ${cond}.\n\nDLACZEGO WARTO INWESTOWAĆ?\n- Materiały najwyższej próby\n- Autentyczność potwierdzona przez system V-Boost\n- Design, który dominuje na ulicach w 2026 roku\n\nLOGISTYKA & BEZPIECZEŃSTWO:\nWysyłka priorytetowa zabezpieczona przed czynnikami zewnętrznymi. Gwarancja dostarczenia w stanie nienaruszonym. Ekspresowa wysyłka tego samego dnia.\n\n#vinted #luxury #grail #vboost #style #fashion #${brand.toLowerCase()} #${name.replace(/\s+/g, '_').toLowerCase()}`;
+                resText.innerText = finalDesc;
+                calculateNetPrice();
+            }, 1200);
+        }
+
+        // Profit Calculator
+        function calculateNetPrice() {
+            const price = parseFloat(document.getElementById('inPrice').value) || 0;
+            const fee = (price * 0.07) + 2.90;
+            const net = price - fee;
+
+            document.getElementById('netOut').innerText = net.toFixed(2) + " PLN";
+            document.getElementById('feeOut').innerText = fee.toFixed(2) + " PLN";
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById('outText').innerText;
+            navigator.clipboard.writeText(text);
+            alert("V-BOOST_SYSTEM: Tekst skopiowany do schowka.");
+        }
+
+        // Dynamic UI Animation (Market Heat)
+        setInterval(() => {
+            for(let i=1; i<=5; i++) {
+                const bar = document.getElementById(`bar-${i}`);
+                if(bar) {
+                    const h = Math.floor(Math.random() * 80) + 20;
+                    bar.style.height = h + "%";
+                }
+            }
+        }, 2000);
+
+        // System Log
+        console.log("%c V-BOOST ULTRA v3.0 ACTIVE ", "color: #00ffcc; background: black; font-size: 20px; font-weight: 800; padding: 10px; border: 2px solid #00ffcc;");
     </script>
 </body>
 </html>
